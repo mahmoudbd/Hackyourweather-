@@ -3,7 +3,7 @@ import Infoweather from './Infoweather';
 import Button from './Button';
 import Search from './Search';
 
-const APIKEY = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
+const APIKEY = 'd20c681e8483b32b7856ea66f919a3f4';
 const Hackyourweather = () => {
 	const [ cities, setCities ] = useState([]);
 	const [ message, setMessage ] = useState(' No cities searched for yet... ');
