@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Infoweather from './Infoweather';
 import Button from './Button';
 import Search from './Search';
+import Recharts from './Recharts';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const APIKEY = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
 const Hackyourweather = () => {
@@ -45,18 +47,29 @@ const Hackyourweather = () => {
 	};
 
 	return (
-		<div>
-			<h1>Weather</h1>
-			<h3 className="message">{message}</h3>
-			<form className="btn2">
-				<Search handelSearch={handelSearch} />
-				<Button handelButton={handelButton} />
-			</form>
+		<Router>
+			<div className="main-div">
+				<h1>Weather</h1>
+				<Switch>
+					<Route exact path="/">
+						<h3 className="message">{message}</h3>
+						<form className="btn2">
+							<Search handelSearch={handelSearch} />
+							<Button handelButton={handelButton} />
+						</form>
 
-			{error && <h2 className="message">{error}</h2>}
-			{isLoading && <h1> Loading...</h1>}
-			<ul>{cities.map((city) => <Infoweather props={city} key={city.id} deleteItem={deleteItem} />)}</ul>
-		</div>
+						{error && <h2 className="message">{error}</h2>}
+						{isLoading && <h1> Loading...</h1>}
+						<ul>
+							{cities.map((city) => <Infoweather props={city} key={city.id} deleteItem={deleteItem} />)}
+						</ul>
+					</Route>
+					<Route path="/:id">
+						<Recharts />
+					</Route>
+				</Switch>
+			</div>
+		</Router>
 	);
 };
 
